@@ -1,0 +1,485 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                    SAFETY FEATURES GUIDE                                   ║
+║            FCW | LDW | DMS with Audio Alerts                              ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+This guide explains the three critical safety features integrated into the ADAS:
+
+1. Forward Collision Warning (FCW)
+2. Lane Departure Warning (LDW)
+3. Driver Monitoring System (DMS)
+
+═══════════════════════════════════════════════════════════════════════════
+
+QUICK START
+═══════════════════════════════════════════════════════════════════════════
+
+Run ADAS with Safety Alerts:
+────────────────────────────
+cd /home/vision2030/Desktop/adas-perception
+source venv/bin/activate
+python3 adas_with_safety_alerts.py
+
+
+═══════════════════════════════════════════════════════════════════════════
+
+FEATURE 1: FORWARD COLLISION WARNING (FCW)
+═══════════════════════════════════════════════════════════════════════════
+
+What it does:
+─────────────
+Monitors vehicles ahead and warns you if a collision is imminent.
+
+How it works:
+─────────────
+1. Tracks bounding boxes of vehicles (cars, trucks, buses) ahead
+2. Calculates how fast the vehicle's size is growing in the frame
+3. Estimates Time-to-Collision (TTC) based on growth rate
+4. If TTC < 2 seconds: Triggers warning
+5. If TTC < 1 second: Triggers CRITICAL alert
+
+
+Alert Levels:
+─────────────
+WARNING (TTC < 2.0s):
+  - Orange alert banner
+  - Audio: "Collision Warning!"
+  - Message: "Collision Warning!"
+
+CRITICAL (TTC < 1.0s):
+  - Red alert banner
+  - Audio: "BRAKE! BRAKE!" (loud, urgent)
+  - Message: "BRAKE! BRAKE!"
+
+
+Technical Details:
+──────────────────
+Algorithm: Time-to-Collision (TTC) Estimation
+
+TTC = (Critical_Area - Current_Area) / Growth_Rate
+
+Where:
+  - Current_Area = Bounding box area in pixels
+  - Growth_Rate = Change in area per second
+  - Critical_Area = 60% of frame area (collision imminent)
+
+Example:
+  Frame: 640x480 = 307,200 pixels
+  Critical: 60% = 184,320 pixels
+
+  Truck bbox at t=0: 50,000 pixels²
+  Truck bbox at t=0.5: 75,000 pixels²
+  Growth rate: (75,000 - 50,000) / 0.5 = 50,000 pixels²/s
+
+  TTC = (184,320 - 75,000) / 50,000 = 2.18 seconds
+  → WARNING triggered
+
+
+Detection Zone:
+───────────────
+Only monitors center 60% of frame (vehicles directly ahead)
+Ignores vehicles in peripheral vision
+
+
+Cooldown:
+─────────
+2 seconds between alerts to avoid spam
+
+
+Visual Feedback:
+────────────────
+- Red/Orange banner at top of screen
+- Shows TTC value
+- Shows vehicle type (truck, car, bus)
+
+
+═══════════════════════════════════════════════════════════════════════════
+
+FEATURE 2: LANE DEPARTURE WARNING (LDW)
+═══════════════════════════════════════════════════════════════════════════
+
+What it does:
+─────────────
+Alerts you when your vehicle drifts out of its lane without using turn signals.
+
+How it works:
+─────────────
+1. Detects lane lines (green lines in visualization)
+2. Calculates the center of the detected lane
+3. Compares lane center to frame center
+4. If offset > 50 pixels: Vehicle is drifting
+5. Triggers directional alert
+
+
+Alert Messages:
+───────────────
+"Drifting Left"  - Vehicle drifting left
+"Drifting Right" - Vehicle drifting right
+
+
+Turn Signal Integration:
+─────────────────────────
+- LDW is DISABLED when turn signal is active
+- Use the turn signal buttons in GUI:
+  - "◄ Left" - Enable left turn signal
+  - "Right ►" - Enable right turn signal
+  - "Off" - Disable turn signals
+
+This prevents false alerts during intentional lane changes.
+
+
+Technical Details:
+──────────────────
+Threshold: 50 pixels from center
+Smoothing: 10-frame moving average (reduces noise)
+Cooldown: 3 seconds between alerts
+
+Example:
+  Frame width: 640 pixels
+  Frame center: 320 pixels
+  Lane center: 380 pixels
+  Offset: +60 pixels (right)
+  → "Drifting Right" triggered
+
+
+Visual Feedback:
+────────────────
+- Orange banner at top of screen
+- Shows direction (Left/Right)
+- Shows offset in pixels
+
+
+═══════════════════════════════════════════════════════════════════════════
+
+FEATURE 3: DRIVER MONITORING SYSTEM (DMS)
+═══════════════════════════════════════════════════════════════════════════
+
+What it does:
+─────────────
+Monitors driver attention and alerts when driver is distracted or drowsy.
+
+How it works:
+─────────────
+1. Uses camera to track driver's face and eyes
+2. Detects when driver looks down (phone usage)
+3. Monitors eye closure (drowsiness)
+4. Tracks head pose (forward, down, left, right)
+5. If looking down > 3 seconds: Triggers distraction alert
+6. If eyes closed or drowsy: Triggers drowsiness alert
+
+
+Distraction Types:
+──────────────────
+
+PHONE USAGE (looking down > 3 seconds):
+  - Alert: "Eyes on the Road!"
+  - Severity: CRITICAL
+  - Triggered when head pose = "down" for >3 seconds
+  - Typical scenario: Looking at phone in lap
+
+DROWSINESS (eyes closed or drowsy score > 0.7):
+  - Alert: "Driver Drowsiness Detected"
+  - Severity: WARNING
+  - Triggered by prolonged eye closure
+  - Typical scenario: Fatigue, falling asleep
+
+
+Technical Details:
+──────────────────
+Detection Method: Haar Cascade + MediaPipe Face Mesh
+
+Head Pose States:
+  - 'forward' - Normal driving
+  - 'down' - Looking down (phone)
+  - 'left' - Looking left
+  - 'right' - Looking right
+
+Drowsiness Scoring:
+  - Eye Aspect Ratio (EAR) calculation
+  - Score range: 0.0 (alert) to 1.0 (drowsy)
+  - Threshold: 0.7
+
+Distraction Threshold: 3.0 seconds
+Cooldown: 5 seconds between alerts
+
+
+Camera Requirements:
+─────────────────────
+- Requires driver-facing camera
+- Recommended: 720p or higher
+- Lighting: Good lighting on driver's face
+- Position: Mounted on dashboard facing driver
+
+
+Visual Feedback:
+────────────────
+- Red banner at top of screen
+- Shows distraction type (phone/drowsiness)
+- Shows duration of distraction
+
+
+═══════════════════════════════════════════════════════════════════════════
+
+AUDIO ALERT SYSTEM
+═══════════════════════════════════════════════════════════════════════════
+
+Platform Support:
+─────────────────
+Linux:   espeak (primary) or festival (fallback)
+macOS:   macOS say command
+Windows: System beep + console message
+
+Installation (Linux):
+─────────────────────
+sudo apt-get install espeak
+
+Or:
+sudo apt-get install festival
+
+
+Audio Messages:
+───────────────
+FCW Critical:       "BRAKE! BRAKE!" (loud, fast)
+FCW Warning:        "Collision Warning!"
+LDW Left:           "Drifting Left"
+LDW Right:          "Drifting Right"
+DMS Phone:          "Eyes on the Road!"
+DMS Drowsiness:     "Driver Drowsiness Detected"
+
+
+Volume and Speed:
+─────────────────
+- Volume: Maximum (200/200)
+- Speech rate: Fast (150 words/min)
+- Ensures alerts are heard immediately
+
+
+Disable Audio:
+──────────────
+Use the "Audio Alerts" checkbox in GUI to mute all audio while keeping
+visual alerts active.
+
+
+═══════════════════════════════════════════════════════════════════════════
+
+GUI CONTROLS
+═══════════════════════════════════════════════════════════════════════════
+
+Safety Alerts Panel (Red Section):
+───────────────────────────────────
+
+☑ Forward Collision Warning (FCW)
+   Enable/disable collision detection
+
+☑ Lane Departure Warning (LDW)
+   Enable/disable lane departure detection
+
+☑ Driver Monitoring System (DMS)
+   Enable/disable driver attention monitoring
+   (Only available if ultra_ai_features.py installed)
+
+☑ Audio Alerts
+   Enable/disable audio warnings
+
+Turn Signal: [◄ Left] [Right ►] [Off]
+   Simulate turn signals to test LDW suppression
+
+
+═══════════════════════════════════════════════════════════════════════════
+
+TESTING THE FEATURES
+═══════════════════════════════════════════════════════════════════════════
+
+Test Forward Collision Warning:
+────────────────────────────────
+1. Run the application
+2. Point camera at road with vehicle ahead
+3. Approach vehicle or let vehicle approach
+4. As vehicle's size grows rapidly in frame:
+   - WARNING appears when TTC < 2s
+   - CRITICAL alert when TTC < 1s
+
+Simulate with video:
+  Use a dashcam video showing approach to stopped traffic
+
+
+Test Lane Departure Warning:
+─────────────────────────────
+1. Run the application
+2. Ensure lane lines are detected (green lines visible)
+3. Deliberately drift left or right
+4. When lane center offset > 50 pixels:
+   - "Drifting Left/Right" alert appears
+
+Test turn signal suppression:
+  Click "◄ Left" before drifting left
+  → No alert should trigger
+
+
+Test Driver Monitoring:
+───────────────────────
+1. Run the application
+2. Ensure DMS checkbox is enabled
+3. Look down at your lap for 3+ seconds
+4. "Eyes on the Road!" alert should trigger
+
+Test drowsiness:
+  Close your eyes for several seconds
+  → "Driver Drowsiness Detected" alert
+
+
+═══════════════════════════════════════════════════════════════════════════
+
+TROUBLESHOOTING
+═══════════════════════════════════════════════════════════════════════════
+
+Problem: No audio alerts
+────────────────────────
+Solution 1: Install espeak
+  sudo apt-get install espeak
+
+Solution 2: Check audio checkbox is enabled in GUI
+
+Solution 3: Check system volume
+
+
+Problem: FCW triggers too often
+────────────────────────────────
+Solution: Adjust threshold in safety_alerts.py:
+  self.fcw_ttc_threshold = 2.0  # Increase to 3.0 or 4.0
+
+
+Problem: LDW triggers during normal driving
+────────────────────────────────────────────
+Solution: Adjust threshold in safety_alerts.py:
+  self.ldw_center_threshold = 50  # Increase to 75 or 100
+
+
+Problem: DMS not working
+────────────────────────
+Solution 1: Check ultra_ai_features.py is installed
+Solution 2: Ensure good lighting on driver's face
+Solution 3: Check camera is positioned to see driver's face
+
+
+Problem: False alerts
+─────────────────────
+Solution: Each feature has a cooldown period to prevent spam
+  - FCW: 2 seconds
+  - LDW: 3 seconds
+  - DMS: 5 seconds
+
+Adjust cooldowns in safety_alerts.py if needed
+
+
+═══════════════════════════════════════════════════════════════════════════
+
+ADVANCED CONFIGURATION
+═══════════════════════════════════════════════════════════════════════════
+
+Edit safety_alerts.py to customize:
+
+Forward Collision Warning:
+──────────────────────────
+self.fcw_ttc_threshold = 2.0      # TTC threshold (seconds)
+self.fcw_alert_cooldown = 2.0     # Cooldown (seconds)
+
+Lane Departure Warning:
+───────────────────────
+self.ldw_center_threshold = 50    # Offset threshold (pixels)
+self.ldw_alert_cooldown = 3.0     # Cooldown (seconds)
+
+Driver Monitoring:
+──────────────────
+self.dms_distraction_threshold = 3.0  # Looking down time (seconds)
+self.dms_alert_cooldown = 5.0         # Cooldown (seconds)
+
+
+═══════════════════════════════════════════════════════════════════════════
+
+PERFORMANCE IMPACT
+═══════════════════════════════════════════════════════════════════════════
+
+FCW: Very Low (-1 FPS)
+  - Uses existing detection data
+  - Simple math calculations
+
+LDW: Very Low (-1 FPS)
+  - Uses existing lane detection
+  - Minimal processing
+
+DMS: Medium (-5 FPS)
+  - Face detection and tracking
+  - Eye aspect ratio calculation
+  - Most intensive of the three
+
+Total impact: ~5-7 FPS with all features enabled
+
+
+═══════════════════════════════════════════════════════════════════════════
+
+SAFETY NOTES
+═══════════════════════════════════════════════════════════════════════════
+
+IMPORTANT:
+──────────
+This ADAS system is for RESEARCH and EDUCATIONAL purposes only.
+
+⚠️  DO NOT rely solely on this system for actual driving safety
+⚠️  Always remain attentive while driving
+⚠️  Keep hands on wheel and eyes on road
+⚠️  These features are prototypes, not production-grade systems
+⚠️  False alerts and missed detections can occur
+
+This system is designed to demonstrate ADAS concepts and algorithms.
+For production use, extensive testing, validation, and certification
+are required.
+
+
+═══════════════════════════════════════════════════════════════════════════
+
+SUMMARY
+═══════════════════════════════════════════════════════════════════════════
+
+Three Critical Safety Features:
+
+1. FCW - Prevents rear-end collisions
+   ✓ Monitors vehicles ahead
+   ✓ Calculates time-to-collision
+   ✓ "BRAKE! BRAKE!" alert when critical
+
+2. LDW - Prevents lane drift accidents
+   ✓ Tracks lane position
+   ✓ Detects unintentional drift
+   ✓ "Drifting Left/Right" alerts
+   ✓ Respects turn signals
+
+3. DMS - Prevents distraction accidents
+   ✓ Monitors driver attention
+   ✓ Detects phone usage
+   ✓ Detects drowsiness
+   ✓ "Eyes on the Road!" alerts
+
+All with audio warnings for immediate awareness!
+
+═══════════════════════════════════════════════════════════════════════════
+
+QUICK REFERENCE COMMANDS
+═══════════════════════════════════════════════════════════════════════════
+
+# Run ADAS with Safety Alerts
+python3 adas_with_safety_alerts.py
+
+# Test Safety Alert System
+python3 safety_alerts.py
+
+# Install audio (Linux)
+sudo apt-get install espeak
+
+═══════════════════════════════════════════════════════════════════════════
+
+For more information, see the code in:
+  - safety_alerts.py
+  - adas_with_safety_alerts.py
+
+═══════════════════════════════════════════════════════════════════════════
