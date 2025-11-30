@@ -1,0 +1,121 @@
+# ADAS Ultra-Advanced Perception System - Requirements
+# Version: 3.0.0 ULTIMATE
+
+# ============================================================================
+# CORE DEPENDENCIES (Required for Basic Functionality)
+# ============================================================================
+
+numpy>=1.21.0
+opencv-python>=4.5.0
+opencv-contrib-python>=4.5.0
+wxPython>=4.1.0
+psutil>=5.8.0
+scipy>=1.7.0
+scikit-learn>=1.0.0
+
+# ============================================================================
+# ADVANCED FEATURES (Highly Recommended)
+# ============================================================================
+
+# For YOLOv8 object detection (best performance)
+ultralytics>=8.0.0
+
+# For deep learning and GPU acceleration
+torch>=2.0.0
+torchvision>=0.15.0
+
+# For pose estimation (MediaPipe)
+mediapipe>=0.10.0
+
+# For real-time graphs and visualization
+matplotlib>=3.5.0
+seaborn>=0.11.0
+
+# For advanced analytics
+pandas>=1.3.0
+plotly>=5.0.0
+
+# ============================================================================
+# 3D VISUALIZATION (Optional but Recommended)
+# ============================================================================
+
+# For 3D point cloud visualization
+# open3d>=0.16.0  # Uncomment if you want advanced 3D rendering
+
+# ============================================================================
+# IMAGE PROCESSING
+# ============================================================================
+
+Pillow>=9.0.0
+scikit-image>=0.19.0
+imutils>=0.5.4
+
+# ============================================================================
+# DATA MANAGEMENT
+# ============================================================================
+
+h5py>=3.6.0
+sqlite3  # Built-in, no install needed
+
+# ============================================================================
+# WEB & API (For Future Web Dashboard)
+# ============================================================================
+
+# flask>=2.0.0
+# flask-cors>=3.0.0
+# flask-socketio>=5.0.0
+
+# ============================================================================
+# PERFORMANCE & MONITORING
+# ============================================================================
+
+memory_profiler>=0.60.0
+py-cpuinfo>=9.0.0
+
+# ============================================================================
+# UTILITIES
+# ============================================================================
+
+tqdm>=4.62.0
+colorama>=0.4.4
+
+# ============================================================================
+# DEVELOPMENT DEPENDENCIES (Optional)
+# ============================================================================
+
+# pytest>=7.0.0
+# black>=22.0.0
+# flake8>=4.0.0
+# mypy>=0.950
+
+# ============================================================================
+# DOCUMENTATION (Optional)
+# ============================================================================
+
+# sphinx>=4.5.0
+# sphinx-rtd-theme>=1.0.0
+
+# ============================================================================
+# GPU ACCELERATION (Platform Specific)
+# ============================================================================
+
+# For NVIDIA GPUs (CUDA 11.8)
+# Install PyTorch with CUDA:
+# pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118
+
+# For AMD GPUs (ROCm)
+# pip install torch torchvision --index-url https://download.pytorch.org/whl/rocm5.4.2
+
+# ============================================================================
+# NOTES
+# ============================================================================
+
+# Minimum Install (Core Only):
+# pip install numpy opencv-python wxPython psutil
+
+# Recommended Install (All Features):
+# pip install -r requirements_ultra.txt
+
+# Full Install with GPU:
+# pip install -r requirements_ultra.txt
+# pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118

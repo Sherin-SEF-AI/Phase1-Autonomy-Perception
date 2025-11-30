@@ -1,0 +1,61 @@
+# Claude Code directory - DO NOT PUSH
+.claude/
+.claude-code/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+*.egg-info/
+dist/
+build/
+
+# Virtual Environment
+venv/
+ENV/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+*.tmp
+
+# YOLO
+yolov8n.pt
+yolov8s.pt
+yolov8m.pt
+yolov8l.pt
+yolov8x.pt
+*.pt
+
+# Data files
+*.mp4
+*.avi
+*.mov
+test_videos/
+output_videos/
+*.log
+
+# Profiles (user-specific)
+*.profile
+
+# Temporary files
+*.csv
+*.json
+*.txt.bak
+
+# MediaPipe models (downloaded at runtime)
+*.task
+*.tflite

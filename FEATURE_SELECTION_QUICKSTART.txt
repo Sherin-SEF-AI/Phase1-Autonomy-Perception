@@ -1,0 +1,247 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║              FEATURE SELECTION - QUICK START GUIDE                         ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+🎛️  NEW FEATURE: Manual Feature Selection Dialog
+
+When you launch adas_complete_ultra.py, a FEATURE SELECTION DIALOG will appear
+BEFORE the main application starts. This lets you choose which features to
+enable and optimize performance.
+
+═══════════════════════════════════════════════════════════════════════════
+
+📋 WHAT YOU'LL SEE
+
+The dialog shows:
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ Select Features to Enable                                               │
+│ Choose which features to enable. More features = lower FPS              │
+├──────────────────────────────────────────────────────────────────────────┤
+│                                                                          │
+│ Quick Select:  [All Features] [Balanced] [Speed Mode] [Disable All]    │
+│                                                                          │
+│ ──────────────────────────────────────────────────────────────────────  │
+│                                                                          │
+│ 🟠 ULTRA FEATURES                                                       │
+│   ☑ Optical Flow Visualization          Medium impact (-5 FPS)         │
+│   ☑ Scene Classification                Low impact (-2 FPS)            │
+│   ☑ Vehicle Type Classification         Medium impact (-3 FPS)         │
+│   ☑ Motion Prediction Paths             Low impact (-1 FPS)            │
+│   ☑ Driving Behavior Score              Low impact (-1 FPS)            │
+│   ☑ Object Density Heatmap              Medium impact (-2 FPS)         │
+│                                                                          │
+│ 🟢 AI FEATURES                                                          │
+│   ☑ Traffic Sign Recognition            Medium impact (-4 FPS)         │
+│   ☑ Traffic Light Detection             Medium impact (-3 FPS)         │
+│   ☑ Driver Attention Monitoring         High impact (-6 FPS)           │
+│   ☑ Weather Condition Detection         Very low impact (-0.5 FPS)     │
+│   ☑ Parking Space Detection             High impact (-5 FPS)           │
+│   ☑ Night Vision Enhancement            Low impact (-1 FPS)            │
+│   ☑ Emergency Vehicle Detection         Low impact (-2 FPS)            │
+│   ☑ Road Debris Detection               Medium impact (-4 FPS)         │
+│                                                                          │
+│ 🔵 MULTI-CAMERA FEATURES                                                │
+│   ☐ Camera 0: Pedestrian Pose           High impact (-7 FPS)           │
+│   ☐ Camera 0: License Plates            Low impact (-2 FPS)            │
+│   ☐ Camera 1: Optical Flow              Medium impact (-5 FPS)         │
+│   ☐ Camera 2: Pothole Detection         Medium impact (-3 FPS)         │
+│                                                                          │
+│ 🟣 VISUALIZATION                                                        │
+│   ☑ Statistics Dashboard                Very low impact                │
+│   ☑ Performance Graphs                  Very low impact                │
+│                                                                          │
+│ Expected FPS: 18 (Good)                                                 │
+│                                                                          │
+│ [Load Profile] [Save Profile]              [Cancel] [Start Application]│
+└──────────────────────────────────────────────────────────────────────────┘
+
+═══════════════════════════════════════════════════════════════════════════
+
+🚀 QUICK START - 3 STEPS
+
+STEP 1: Launch Application
+──────────────────────────
+cd /home/vision2030/Desktop/adas-perception
+source venv/bin/activate
+python3 adas_complete_ultra.py
+
+
+STEP 2: Choose a Preset
+────────────────────────
+Click one of the quick select buttons:
+
+• [Speed Mode]   → 25-30 FPS, essential features only
+• [Balanced]     → 18-22 FPS, good features without heavy ones ⭐ RECOMMENDED
+• [All Features] → 8-15 FPS, everything enabled
+• [Disable All]  → 30-40 FPS, core ADAS only
+
+
+STEP 3: Start Application
+──────────────────────────
+Click [Start Application] button or press Enter
+
+
+═══════════════════════════════════════════════════════════════════════════
+
+🎯 PRESETS EXPLAINED
+
+┌───────────────┬─────────────┬────────────────────────────────────────────┐
+│ PRESET        │ TARGET FPS  │ WHAT'S ENABLED                             │
+├───────────────┼─────────────┼────────────────────────────────────────────┤
+│ Speed Mode    │   25-30     │ Only lightweight features:                 │
+│               │             │ - Scene Classification                     │
+│               │             │ - Behavior Score                           │
+│               │             │ - Weather Detection                        │
+│               │             │ - Night Vision                             │
+│               │             │                                            │
+│ Balanced ⭐   │   18-22     │ All features EXCEPT:                       │
+│ (Default)     │             │ - Optical Flow (heavy)                     │
+│               │             │ - Heatmap (heavy)                          │
+│               │             │ - Driver Monitoring (heavy)                │
+│               │             │ - Parking Detection (heavy)                │
+│               │             │ - Multi-camera features (optional)         │
+│               │             │                                            │
+│ All Features  │    8-15     │ Everything enabled - all 100+ features     │
+│               │             │ Requires powerful hardware                 │
+│               │             │                                            │
+│ Disable All   │   30-40     │ Core ADAS only:                            │
+│               │             │ - Detection, tracking, lanes               │
+│               │             │ - Fastest mode for troubleshooting         │
+└───────────────┴─────────────┴────────────────────────────────────────────┘
+
+═══════════════════════════════════════════════════════════════════════════
+
+💾 SAVE YOUR CONFIGURATION
+
+If you customize the checkboxes:
+
+1. Click [Save Profile]
+2. Enter filename (e.g., "my_config.profile")
+3. Click Save
+
+Next time:
+1. Click [Load Profile]
+2. Select your saved file
+3. Click Open
+4. All checkboxes update automatically!
+
+═══════════════════════════════════════════════════════════════════════════
+
+📊 FPS ESTIMATE
+
+The dialog shows expected FPS based on your selections:
+
+🟢 Green  (≥25 FPS): Excellent - Smooth, real-time
+🟡 Yellow (20-24 FPS): Good - Very usable
+🟠 Orange (15-19 FPS): Acceptable - Minor lag
+🔴 Red    (<15 FPS): Slow - Consider disabling features
+
+NOTE: Actual FPS depends on your hardware, camera count, and resolution.
+
+═══════════════════════════════════════════════════════════════════════════
+
+💡 TIPS
+
+✅ ALWAYS start with "Balanced" preset first
+✅ Use 1 camera for best performance
+✅ Use 640x480 resolution instead of 1280x720 for 4x speed boost
+✅ Save your favorite configurations as profiles
+✅ You can still toggle features at runtime using GUI checkboxes
+
+❌ Don't enable all features unless you have powerful hardware (i9, 32GB RAM, GPU)
+❌ Don't use 4 cameras with "All Features" - will be very slow
+❌ Don't enable multi-camera features if you only have 1 camera
+
+═══════════════════════════════════════════════════════════════════════════
+
+🎮 USAGE EXAMPLE
+
+Scenario: You want smooth performance for a demo
+
+1. Launch: python3 adas_complete_ultra.py
+2. Dialog appears
+3. Click [Speed Mode]
+4. FPS estimate shows: "Expected FPS: 26 (Excellent)" 🟢
+5. Click [Start Application]
+6. Enjoy smooth 25-30 FPS!
+
+═══════════════════════════════════════════════════════════════════════════
+
+🎮 USAGE EXAMPLE 2
+
+Scenario: You want to showcase advanced AI features
+
+1. Launch: python3 adas_complete_ultra.py
+2. Dialog appears
+3. Click [Balanced]
+4. Manually check additional features:
+   ☑ Traffic Signs
+   ☑ Traffic Lights
+   ☑ Emergency Vehicles
+   ☑ Debris Detection
+5. FPS estimate shows: "Expected FPS: 18 (Good)" 🟡
+6. Click [Save Profile]
+7. Save as "demo_ai.profile"
+8. Click [Start Application]
+
+Next time, just [Load Profile] → "demo_ai.profile"!
+
+═══════════════════════════════════════════════════════════════════════════
+
+🎮 USAGE EXAMPLE 3
+
+Scenario: You want ALL features and have powerful hardware
+
+1. Launch: python3 adas_complete_ultra.py
+2. Dialog appears
+3. Click [All Features]
+4. FPS estimate shows: "Expected FPS: 12 (Acceptable)" 🟠
+5. If acceptable, click [Start Application]
+6. Use 1-2 cameras only (not 4)
+7. Use 640x480 resolution
+
+═══════════════════════════════════════════════════════════════════════════
+
+🆘 TROUBLESHOOTING
+
+Q: Dialog doesn't appear
+A: Make sure you're running adas_complete_ultra.py (not adas-perception.py)
+
+Q: FPS lower than estimated
+A: - Use fewer cameras (1 instead of 4)
+   - Lower resolution (640x480 instead of 1280x720)
+   - Close background applications
+   - Try "Speed Mode" preset
+
+Q: Want to skip the dialog
+A: Use adas_fast.py or adas-perception.py instead - they launch directly
+
+Q: Profile won't load
+A: Make sure the .profile file is valid JSON and from the current version
+
+═══════════════════════════════════════════════════════════════════════════
+
+📚 MORE INFORMATION
+
+For detailed guides, see:
+
+• FEATURE_SELECTION_GUIDE.md     - Complete feature selection documentation
+• WHICH_VERSION_TO_RUN.txt       - Choosing the right ADAS version
+• PERFORMANCE_OPTIMIZATION.md    - Performance tuning guide
+• AI_FEATURES_GUIDE.md           - AI feature details
+• MULTI_CAMERA_GUIDE.md          - Multi-camera setup
+
+═══════════════════════════════════════════════════════════════════════════
+
+SUMMARY
+
+✅ Feature selection dialog appears at launch
+✅ Choose from presets or customize manually
+✅ See FPS estimate in real-time
+✅ Save/load profiles for convenience
+✅ Complete control over enabled features
+
+🎯 Recommended: Start with "Balanced" preset!
+
+═══════════════════════════════════════════════════════════════════════════
