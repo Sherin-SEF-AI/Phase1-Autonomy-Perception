@@ -7,7 +7,7 @@ Advanced Driver Assistance System (ADAS) with 100+ features for perception, dete
 ![YOLOv8](https://img.shields.io/badge/YOLOv8-Ultralytics-orange)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
 
-## 🚀 Quick Start
+## Quick Start
 
 ```bash
 # Clone repository
@@ -25,23 +25,23 @@ pip install -r requirements.txt
 python3 run_all_features.py
 ```
 
-## ✨ Features
+## Features
 
-### 🎯 Core Detection & Tracking
+### Core Detection & Tracking
 - **Object Detection** - YOLOv8-based detection (people, vehicles, bikes)
 - **Multi-Object Tracking** - Kalman filter-based tracking with unique IDs
 - **Lane Detection** - Real-time lane line detection
 - **Collision Warning** - Forward collision warnings
 - **Safe Distance Monitoring** - Tailgating detection
 
-### 🚦 Traffic & Road Analysis
+### Traffic & Road Analysis
 - **Traffic Sign Recognition** - Stop, yield, speed limits
 - **Traffic Light Detection** - Red/yellow/green state detection
 - **Road Debris Detection** - Obstacle and debris detection
 - **Pothole Detection** - Road surface damage detection
 - **Parking Space Detection** - Available/occupied space marking
 
-### 🧠 AI-Powered Features
+### AI-Powered Features
 - **Scene Classification** - Road/highway/urban/parking detection
 - **Vehicle Type Classification** - Car/truck/bus/motorcycle
 - **Weather Detection** - Clear/rainy/foggy/snowy conditions
@@ -49,7 +49,7 @@ python3 run_all_features.py
 - **Emergency Vehicle Detection** - Police/ambulance/fire truck
 - **Night Vision Enhancement** - Low-light image enhancement
 
-### 📊 Advanced Analytics
+### Advanced Analytics
 - **Optical Flow Analysis** - Dense motion field visualization
 - **Motion Prediction** - Future trajectory prediction
 - **Driving Behavior Analysis** - Aggressive/normal/cautious scoring
@@ -57,13 +57,13 @@ python3 run_all_features.py
 - **License Plate Detection** - Vehicle plate recognition
 - **Object Density Heatmap** - Heat map visualization
 
-### 📈 Visualization & Monitoring
+### Visualization & Monitoring
 - **Statistics Dashboard** - Real-time metrics panel
 - **Performance Graphs** - FPS, CPU, object count over time
 - **Multi-Camera Display** - Support for 4 cameras
 - **Real-time Overlays** - Bounding boxes, tracking IDs, predictions
 
-## 📦 Available Versions
+## Available Versions
 
 | Version | Features | FPS | Best For |
 |---------|----------|-----|----------|
@@ -88,23 +88,23 @@ python3 adas_complete_ultra.py
 python3 adas_fast.py
 ```
 
-## 🎛️ Feature Selection Dialog
+## Feature Selection Dialog
 
 The `adas_complete_ultra.py` version includes a pre-launch dialog where you can:
 
-- ✅ Choose exactly which features to enable
-- ✅ See real-time FPS estimates
-- ✅ Use quick presets (All, Balanced, Speed, None)
-- ✅ Save/Load configurations as profiles
-- ✅ View performance impact for each feature
+- Choose exactly which features to enable
+- See real-time FPS estimates
+- Use quick presets (All, Balanced, Speed, None)
+- Save/Load configurations as profiles
+- View performance impact for each feature
 
 **Quick Presets:**
 - **All Features** - Enable everything (8-15 FPS)
-- **Balanced** - Good features without heavy ones (18-22 FPS) ⭐ Recommended
+- **Balanced** - Good features without heavy ones (18-22 FPS) - Recommended
 - **Speed Mode** - Essential features only (25-30 FPS)
 - **Disable All** - Core ADAS only (30-40 FPS)
 
-## 📋 Requirements
+## Requirements
 
 - **Python**: 3.8 or higher
 - **Operating System**: Linux, macOS, or Windows
@@ -129,23 +129,21 @@ Install all dependencies:
 pip install -r requirements.txt
 ```
 
-## 📖 Documentation
+## Documentation
 
-- **[START_HERE.txt](START_HERE.txt)** - First-time setup guide
-- **[HOW_TO_RUN_ALL_FEATURES.txt](HOW_TO_RUN_ALL_FEATURES.txt)** - Complete guide for all features
-- **[FEATURE_SELECTION_GUIDE.md](FEATURE_SELECTION_GUIDE.md)** - Feature selection documentation
-- **[PERFORMANCE_OPTIMIZATION.md](PERFORMANCE_OPTIMIZATION.md)** - Performance tuning
-- **[MULTI_CAMERA_GUIDE.md](MULTI_CAMERA_GUIDE.md)** - Multi-camera setup
-- **[AI_FEATURES_GUIDE.md](AI_FEATURES_GUIDE.md)** - AI features details
-- **[WHICH_VERSION_TO_RUN.txt](WHICH_VERSION_TO_RUN.txt)** - Version selection guide
+- **START_HERE.txt** - First-time setup guide
+- **HOW_TO_RUN_ALL_FEATURES.txt** - Complete guide for all features
+- **FEATURE_SELECTION_QUICKSTART.txt** - Feature selection quick reference
+- **WHICH_VERSION_TO_RUN.txt** - Version selection guide
+- **ALL_RUN_OPTIONS.txt** - All available run options
 
-## 🎮 Usage Examples
+## Usage Examples
 
 ### Example 1: Basic Usage
 ```bash
 # Run with balanced preset (recommended for first-time users)
 python3 adas_complete_ultra.py
-# Click "Balanced" → "Start Application"
+# Click "Balanced" -> "Start Application"
 ```
 
 ### Example 2: Demo/Presentation
@@ -168,7 +166,7 @@ python3 adas_complete_ultra.py
 # Save as profile for reuse
 ```
 
-## 🔧 Configuration
+## Configuration
 
 ### Camera Settings
 
@@ -185,14 +183,14 @@ Toggle features at runtime using GUI checkboxes:
 
 Or configure before launch using feature selection dialog.
 
-## 📊 Performance Tips
+## Performance Tips
 
 For best performance:
-- ✅ Use **1 camera** instead of 4
-- ✅ Use **640x480 resolution** for 4x speed boost
-- ✅ Close background applications
-- ✅ Use **"Balanced"** or **"Speed Mode"** presets
-- ✅ Disable heavy features if FPS is low
+- Use **1 camera** instead of 4
+- Use **640x480 resolution** for 4x speed boost
+- Close background applications
+- Use **"Balanced"** or **"Speed Mode"** presets
+- Disable heavy features if FPS is low
 
 Heavy features (consider disabling):
 - Driver Attention Monitoring (-6 FPS)
@@ -200,7 +198,7 @@ Heavy features (consider disabling):
 - Parking Space Detection (-5 FPS)
 - Optical Flow Visualization (-5 FPS)
 
-## 🏗️ Project Structure
+## Project Structure
 
 ```
 Phase1-Autonomy-Perception/
@@ -223,7 +221,7 @@ Phase1-Autonomy-Perception/
     └── ...
 ```
 
-## 🧪 Testing
+## Testing
 
 Run the test suite:
 ```bash
@@ -236,7 +234,7 @@ python3 examples/basic_usage.py
 python3 examples/advanced_analytics.py
 ```
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Application is slow
 - Use fewer cameras (1 instead of 4)
@@ -254,29 +252,40 @@ python3 examples/advanced_analytics.py
 - Try different camera index (0, 1, 2, etc.)
 - Test with: `python3 -c "import cv2; print(cv2.VideoCapture(0).read())"`
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## 📄 License
+## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - **YOLOv8** by Ultralytics - Object detection
 - **MediaPipe** by Google - Pose estimation
 - **OpenCV** - Computer vision
 - **wxPython** - GUI framework
 
-## 📞 Contact
+## Author
+
+**Sherin Joseph Roy**
+- Co-Founder & Head of Products, DeepMost AI
+- Location: Bangalore, India
+- Website: [sherinjosephroy.link](https://sherinjosephroy.link)
+- GitHub: [github.com/Sherin-SEF-AI](https://github.com/Sherin-SEF-AI)
+- LinkedIn: [linkedin.com/in/sherin-roy-deepmost](https://www.linkedin.com/in/sherin-roy-deepmost)
+- X (Twitter): [x.com/SherinSEF](https://x.com/SherinSEF)
+- Mastodon: [mastodon.social/@sherinjoesphroy](https://mastodon.social/@sherinjoesphroy)
+
+## Project
 
 **Project**: Phase 1 - Autonomy Perception
-**Organization**: SEF-AI
+**Organization**: DeepMost AI
 **Repository**: [github.com/Sherin-SEF-AI/Phase1-Autonomy-Perception](https://github.com/Sherin-SEF-AI/Phase1-Autonomy-Perception)
 
 ---
 
-**Built with ❤️ for Advanced Driver Assistance**
+**Built for Advanced Driver Assistance**
 
-🤖 *Developed with assistance from Claude Code*
+*Developed with assistance from Claude Code*
