@@ -286,6 +286,3 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ---
 
-**Built for Advanced Driver Assistance**
-
-*Developed with assistance from Claude Code*
