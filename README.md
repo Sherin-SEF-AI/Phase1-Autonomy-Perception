@@ -1,11 +1,14 @@
 # Phase 1 - Autonomy Perception
 
-Advanced Driver Assistance System (ADAS) with 100+ features for perception, detection, and monitoring.
+A real-time Advanced Driver Assistance System (ADAS) perception stack built with Python. Features object detection, lane tracking, and driver monitoring, optimized for unstructured traffic environments (Indian Roads).
 
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
 ![OpenCV](https://img.shields.io/badge/OpenCV-4.8%2B-green)
 ![YOLOv8](https://img.shields.io/badge/YOLOv8-Ultralytics-orange)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
+
+
+
 
 ## Quick Start
 
